@@ -64,17 +64,18 @@ def pytest_configure(config):
     metadata = {
         'Python': platform.python_version(),
         'Platform': platform.platform(),
-        'pytest': pytest.__version__,
-        'py': py.__version__,
-        'pluggy': pluggy.__version__}
+        'Packages': {
+            'pytest': pytest.__version__,
+            'py': py.__version__,
+            'pluggy': pluggy.__version__}}
 
-    plugins = []
+    plugins = dict()
     for plugin, dist in config.pluginmanager.list_plugin_distinfo():
-        name = '{0.project_name}-{0.version}'.format(dist)
+        name, version = dist.project_name, dist.version
         if name.startswith('pytest-'):
             name = name[7:]
-        plugins.append(name)
-    metadata['Plugins'] = list(set(plugins))
+        plugins[name] = version
+    metadata['Plugins'] = plugins
 
     [metadata.update({v: os.environ.get(v)}) for v in ENV if os.environ.get(v)]
     if hasattr(config, 'slaveoutput'):

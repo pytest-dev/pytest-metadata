@@ -8,7 +8,7 @@ pytest_plugins = "pytester",
 def test_metadata(testdir):
     testdir.makepyfile("""
         def test_pass(metadata):
-            for k in ['Python', 'Platform', 'pytest', 'py', 'pluggy']:
+            for k in ['Python', 'Platform', 'Packages']:
                 assert k in metadata
                 assert 'JENKINS_URL' not in metadata
     """)
