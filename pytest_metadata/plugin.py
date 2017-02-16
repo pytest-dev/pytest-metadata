@@ -60,6 +60,7 @@ def metadata(request):
     return request.config._metadata
 
 
+@pytest.hookimpl(tryfirst=True)
 def pytest_configure(config):
     metadata = {
         'Python': platform.python_version(),
