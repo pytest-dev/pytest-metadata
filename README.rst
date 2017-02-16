@@ -16,7 +16,7 @@ access to test session metadata.
 .. image:: https://img.shields.io/github/issues-raw/davehunt/pytest-metadata.svg
    :target: https://github.com/davehunt/pytest-metadata/issues
    :alt: Issues
-.. image:: https://img.shields.io/requires/github/pytest-metadata/pytest-metadata.svg
+.. image:: https://img.shields.io/requires/github/davehunt/pytest-metadata.svg
    :target: https://requires.io/github/davehunt/pytest-metadata/requirements/?branch=master
    :alt: Requirements
 
