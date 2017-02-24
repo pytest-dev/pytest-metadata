@@ -3,6 +3,7 @@ Release Notes
 
 **1.2.0 (unreleased)**
 
+* Added environment variables for AppVeyor and CircleCI.
 * Try to run ``pytest_configure`` first so that other plugins can contribute to
   the metadata.
 

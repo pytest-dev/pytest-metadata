@@ -9,49 +9,16 @@ import _pytest._pluggy as pluggy
 import pytest
 import py
 
+from pytest_metadata.ci import (
+    appveyor, circleci, jenkins, taskcluster, travis_ci)
 
-ENV = [
-    # Jenkins
-    'BUILD_NUMBER',
-    'BUILD_ID',
-    'BUILD_URL',
-    'NODE_NAME',
-    'JOB_NAME',
-    'BUILD_TAG',
-    'EXECUTOR_NUMBER',
-    'JENKINS_URL',
-    'JAVA_HOME',
-    'WORKSPACE',
-    'SVN_REVISION',
-    'CVS_BRANCH',
-    'GIT_COMMIT',
-    'GIT_URL',
-    'GIT_BRANCH',
-    # Travis
-    'CI',
-    'CONTINUOUS_INTEGRATION',
-    'TRAVIS',
-    'TRAVIS_BRANCH',
-    'TRAVIS_BUILD_ID',
-    'TRAVIS_BUILD_NUMBER',
-    'TRAVIS_COMMIT',
-    'TRAVIS_COMMIT_MESSAGE',
-    'TRAVIS_COMMIT_RANGE',
-    'TRAVIS_EVENT_TYPE',
-    'TRAVIS_JOB_ID',
-    'TRAVIS_JOB_NUMBER',
-    'TRAVIS_OS_NAME',
-    'TRAVIS_PULL_REQUEST',
-    'TRAVIS_PULL_REQUEST_BRANCH',
-    'TRAVIS_PULL_REQUEST_SHA',
-    'TRAVIS_PULL_REQUEST_SLUG',
-    'TRAVIS_REPO_SLUG',
-    'TRAVIS_SUDO',
-    'TRAVIS_TAG',
-    # TaskCluster
-    'TASK_ID',
-    'RUN_ID',
-]
+
+CONTINUOUS_INTEGRATION = {
+    'AppVeyor': ['APPVEYOR', appveyor.ENVIRONMENT_VARIABLES],
+    'CirceCI': ['CIRCLECI', circleci.ENVIRONMENT_VARIABLES],
+    'Jenkins': ['JENKINS_URL', jenkins.ENVIRONMENT_VARIABLES],
+    'TaskCluster': ['TASK_ID', taskcluster.ENVIRONMENT_VARIABLES],
+    'Travis CI': ['TRAVIS', travis_ci.ENVIRONMENT_VARIABLES]}
 
 
 @pytest.fixture(scope='session')
@@ -78,7 +45,10 @@ def pytest_configure(config):
         plugins[name] = version
     metadata['Plugins'] = plugins
 
-    [metadata.update({v: os.environ.get(v)}) for v in ENV if os.environ.get(v)]
+    for key, value in CONTINUOUS_INTEGRATION.items():
+        [metadata.update({v: os.environ.get(v)})
+            for v in value[1] if os.environ.get(v)]
+
     if hasattr(config, 'slaveoutput'):
         config.slaveoutput['metadata'] = metadata
     config._metadata = metadata
