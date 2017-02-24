@@ -5,7 +5,7 @@ pytest-metadata is a plugin for `pytest <http://pytest.org>`_ that provides
 access to test session metadata.
 
 .. image:: https://img.shields.io/badge/license-MPL%202.0-blue.svg
-   :target: https://github.com/davehunt/pytest-html/blob/master/LICENSE
+   :target: https://github.com/davehunt/pytest-metadata/blob/master/LICENSE
    :alt: License
 .. image:: https://img.shields.io/pypi/v/pytest-metadata.svg
    :target: https://pypi.python.org/pypi/pytest-metadata/
