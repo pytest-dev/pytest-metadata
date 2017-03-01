@@ -22,14 +22,14 @@ CONTINUOUS_INTEGRATION = {
 
 
 @pytest.fixture(scope='session')
-def metadata(request):
+def metadata(pytestconfig):
     """Provide test session metadata"""
-    return request.config._metadata
+    return pytestconfig._metadata
 
 
 @pytest.hookimpl(tryfirst=True)
 def pytest_configure(config):
-    metadata = {
+    config._metadata = {
         'Python': platform.python_version(),
         'Platform': platform.platform(),
         'Packages': {
@@ -43,15 +43,18 @@ def pytest_configure(config):
         if name.startswith('pytest-'):
             name = name[7:]
         plugins[name] = version
-    metadata['Plugins'] = plugins
+    config._metadata['Plugins'] = plugins
 
     for key, value in CONTINUOUS_INTEGRATION.items():
-        [metadata.update({v: os.environ.get(v)})
+        [config._metadata.update({v: os.environ.get(v)})
             for v in value[1] if os.environ.get(v)]
 
     if hasattr(config, 'slaveoutput'):
-        config.slaveoutput['metadata'] = metadata
-    config._metadata = metadata
+        config.slaveoutput['metadata'] = config._metadata
+
+
+def pytest_report_header(config):
+    return 'metadata: {0}'.format(config._metadata)
 
 
 @pytest.mark.optionalhook
@@ -59,4 +62,4 @@ def pytest_testnodedown(node):
     # note that any metadata from remote slaves will be replaced with the
     # environment from the final slave to quit
     if hasattr(node, 'slaveoutput'):
-        node.config._metadata = node.slaveoutput['metadata']
+        node.config._metadata.update(node.slaveoutput['metadata'])

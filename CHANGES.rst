@@ -1,7 +1,12 @@
 Release Notes
 -------------
 
-**1.2.0 (unreleased)**
+**1.3.0 (2017-03-01)**
+
+* Display initial metadata in report header.
+* Update metadata when running with xdist processes instead of overwriting.
+
+**1.2.0 (2017-02-24)**
 
 * Added environment variables for AppVeyor and CircleCI.
 * Try to run ``pytest_configure`` first so that other plugins can contribute to
