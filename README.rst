@@ -78,7 +78,7 @@ fixture:
 .. code-block:: python
 
   def test_metadata(metadata):
-      assert 'pytest-metadata' in metadata['Plugins']
+      assert 'metadata' in metadata['Plugins']
 
 To access the metadata from a plugin, you can use the `_metadata` attribute of
 the `config` object. This can be used to read/add/modify the metadata:
