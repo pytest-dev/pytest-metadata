@@ -26,3 +26,14 @@ def test_environment_variables(testdir, monkeypatch):
     """)
     result = testdir.runpytest()
     assert result.ret == 0
+
+
+def test_additional_metadata(testdir):
+    testdir.makepyfile("""
+        def test_pass(metadata):
+            assert metadata.get('Dave') == 'Hunt'
+            assert metadata.get('Jim') == 'Bob'
+    """)
+    result = testdir.runpytest('--metadata', 'Dave', 'Hunt',
+                               '--metadata', 'Jim', 'Bob')
+    assert result.ret == 0

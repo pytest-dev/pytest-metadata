@@ -51,6 +51,11 @@ Packages  pytest packages {'py': '1.4.33', 'pytest': '3.0.7'}
 Plugins   pytest plugins  {'metadata': '1.3.0'}
 ========  =============== ===================================
 
+Additional metadata
+___________________
+
+You can provide your own metadata (key, value pair) by specifying ``--metadata`` on the commandline.
+
 Continuous integration
 ----------------------
 
