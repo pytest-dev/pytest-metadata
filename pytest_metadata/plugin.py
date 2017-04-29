@@ -31,7 +31,7 @@ def pytest_addoption(parser):
     parser.addoption('--metadata',
                      action='append',
                      default=[],
-                     dest='metdata',
+                     dest='metadata',
                      metavar=('key', 'value'),
                      nargs=2,
                      help='additional metadata.')
@@ -47,7 +47,7 @@ def pytest_configure(config):
             'py': py.__version__,
             'pluggy': pluggy.__version__}}
     config._metadata.update({
-        k: v for k, v in config.getoption('metdata')})
+        k: v for k, v in config.getoption('metadata')})
 
     plugins = dict()
     for plugin, dist in config.pluginmanager.list_plugin_distinfo():
