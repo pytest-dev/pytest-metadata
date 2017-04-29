@@ -52,9 +52,15 @@ Plugins   pytest plugins  {'metadata': '1.3.0'}
 ========  =============== ===================================
 
 Additional metadata
-___________________
+-------------------
 
-You can provide your own metadata (key, value pair) by specifying ``--metadata`` on the commandline.
+You can provide your own metadata (key, value pair) by specifying ``--metadata`` on the commandline::
+
+   pytest --metadata foo bar
+
+Note: You can provide multiple sets of ``--metadata``::
+
+   pytest --metadata foo bar --metadata baz zoo
 
 Continuous integration
 ----------------------

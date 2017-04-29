@@ -28,8 +28,7 @@ def metadata(pytestconfig):
 
 
 def pytest_addoption(parser):
-    group = parser.getgroup('selenium', 'selenium')
-    group._addoption('--metadata',
+    parser.addoption('--metadata',
                      action='append',
                      default=[],
                      dest='metdata',
