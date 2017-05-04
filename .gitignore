@@ -5,5 +5,6 @@ __pycache__
 .DS_Store
 .eggs
 .tox
+.idea
 build
 dist
