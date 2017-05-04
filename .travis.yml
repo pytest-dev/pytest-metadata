@@ -5,8 +5,14 @@ python:
 - pypy
 - pypy3
 - nightly
+env:
+  matrix:
+  - TOXENV=pytest29
+  - TOXENV=pytest30
 matrix:
   include:
+  - python: 2.7
+    env: TOXENV=flake8
   - python: 3.6
     env: TOXENV=flake8
 install:
