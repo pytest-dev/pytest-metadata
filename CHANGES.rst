@@ -1,6 +1,13 @@
 Release Notes
 -------------
 
+1.4.0 (2017-05-04)
+------------------
+
+* Allow additional metadata to be specified on the command-line.
+
+  * Thanks to `@BeyondEvil <https://github.com/BeyondEvil>`_ for the PR
+
 1.3.0 (2017-03-01)
 ------------------
 
