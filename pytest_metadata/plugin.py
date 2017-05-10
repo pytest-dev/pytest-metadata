@@ -10,12 +10,13 @@ import pytest
 import py
 
 from pytest_metadata.ci import (
-    appveyor, circleci, jenkins, taskcluster, travis_ci)
+    appveyor, circleci, gitlab_ci, jenkins, taskcluster, travis_ci)
 
 
 CONTINUOUS_INTEGRATION = {
     'AppVeyor': ['APPVEYOR', appveyor.ENVIRONMENT_VARIABLES],
     'CirceCI': ['CIRCLECI', circleci.ENVIRONMENT_VARIABLES],
+    'GitLab CI': ['GITLAB_CI', gitlab_ci.ENVIRONMENT_VARIABLES],
     'Jenkins': ['JENKINS_URL', jenkins.ENVIRONMENT_VARIABLES],
     'TaskCluster': ['TASK_ID', taskcluster.ENVIRONMENT_VARIABLES],
     'Travis CI': ['TRAVIS', travis_ci.ENVIRONMENT_VARIABLES]}
