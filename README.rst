@@ -72,6 +72,7 @@ added to metadata if they're present.
 
 * `AppVeyor <https://www.appveyor.com/docs/environment-variables/>`_
 * `CircleCI <https://circleci.com/docs/1.0/environment-variables/>`_
+* `GitLab CI <http://docs.gitlab.com/ce/ci/variables/README.html>`_
 * `Jenkins <https://wiki.jenkins-ci.org/display/JENKINS/Building+a+software+project#Buildingasoftwareproject-JenkinsSetEnvironmentVariables>`_
 * `TaskCluster <https://docs.taskcluster.net/reference/workers/docker-worker/environment>`_
 * `Travis CI <https://docs.travis-ci.com/user/environment-variables/>`_
