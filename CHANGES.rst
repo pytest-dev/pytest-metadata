@@ -1,6 +1,13 @@
 Release Notes
 -------------
 
+1.5.0 (2017-05-15)
+------------------
+
+* Add environment variables for GitLab CI.
+
+  * Thanks to `@tinproject <https://github.com/tinproject>`_ for the PR
+
 1.4.0 (2017-05-04)
 ------------------
 
