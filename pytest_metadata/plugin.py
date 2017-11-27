@@ -5,7 +5,7 @@
 import os
 import platform
 
-import _pytest._pluggy as pluggy
+import pluggy
 import pytest
 import py
 
