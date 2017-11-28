@@ -12,7 +12,7 @@ matrix:
   - python: 3.6
     env: TOXENV=flake8
 install:
-- pip install tox-travis
+- pip install tox
 script:
 - tox
 deploy:
