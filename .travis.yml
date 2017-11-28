@@ -1,27 +1,35 @@
 language: python
-python:
-- 2.7
-- 3.6
-- pypy
-- pypy3
-- nightly
-matrix:
+jobs:
   include:
-  - python: 2.7
-    env: TOXENV=flake8
-  - python: 3.6
-    env: TOXENV=flake8
-install:
-- pip install tox
-script:
-- tox
-deploy:
-  provider: pypi
-  user: davehunt
-  distributions: sdist bdist_wheel
-  on:
-    tags: true
-    repo: davehunt/pytest-metadata
-    python: 3.6
-  password:
-    secure: JfwV5SsxCHVm9m225BMElEdk1+cHsOoSLpmW8+gl9zDkrcsOCaJ4myZyKNZpZtqScfytcEJ/+PYnOpKMGFLDTTBkliX1dnAml6LtZHVHF+2WLfe7i6OXUjd70B5HLUBpjRTm6bOhtg6viMYIetoAYQJ1jSnMwZZPaNoEDHXcGL1OWvXBg2HpCGWPn+XLqQHp8zUMf5UGUzPN5ScC4ntQGRck3x44BlvxKGpLu7v5bp+rwdBe36oKI0WA91ahI7+9aAvrme5seHXJP0HiEahmdRv9Pmk32NxkGgKiKFsDoSW95laRHtbcDEG5CjwnOemNEBC9PSs/x68Zgw07axgYMpTSS89SJxJI+8MZWdzaaxw5P3Owtkv+a5YwmtDwkRCW0dAuSiRI/AqmUl9BrX5Oc384w4Jg8Pl7NMZzpj0Cz8/NukBQHf3YrAqFzdDaCV//Fe3w5vyU4e6+Z7v1DvEYyRVOBRo/J1uk/YA1fweuhBBR8IVJiXFW1g9Q9h9EnxfiqMOpTBZ15TieCgWQFLHLylCpKXAWXI+060KyY21sb4ai1HmpflDs7gNVIQ3On8gAn5SdWhqlaxhA8hoPh66Bd9IupoccCHK8ubCc2LWVv9y4VYja2oJKhZ7CRr0603W3Xy4mBic3Q9wSkkp/2TdBo7D8ocsAqrqM6kaaYe4dc5U=
+    - stage:
+      python: 3.6
+      env: TOXENV=flake8
+    - stage:
+      python: 2.7
+      env: TOXENV=py27
+    - stage:
+      python: 3.6
+      env: TOXENV=py36
+    - stage:
+      python: pypy
+      env: TOXENV=pypy
+    - stage:
+      python: pypy3
+      env: TOXENV=pypy3
+    - stage: deploy
+      python: 3.6
+      install: skip
+      script: skip
+      deploy:
+        provider: pypi
+        user: davehunt
+        password:
+          secure: JfwV5SsxCHVm9m225BMElEdk1+cHsOoSLpmW8+gl9zDkrcsOCaJ4myZyKNZpZtqScfytcEJ/+PYnOpKMGFLDTTBkliX1dnAml6LtZHVHF+2WLfe7i6OXUjd70B5HLUBpjRTm6bOhtg6viMYIetoAYQJ1jSnMwZZPaNoEDHXcGL1OWvXBg2HpCGWPn+XLqQHp8zUMf5UGUzPN5ScC4ntQGRck3x44BlvxKGpLu7v5bp+rwdBe36oKI0WA91ahI7+9aAvrme5seHXJP0HiEahmdRv9Pmk32NxkGgKiKFsDoSW95laRHtbcDEG5CjwnOemNEBC9PSs/x68Zgw07axgYMpTSS89SJxJI+8MZWdzaaxw5P3Owtkv+a5YwmtDwkRCW0dAuSiRI/AqmUl9BrX5Oc384w4Jg8Pl7NMZzpj0Cz8/NukBQHf3YrAqFzdDaCV//Fe3w5vyU4e6+Z7v1DvEYyRVOBRo/J1uk/YA1fweuhBBR8IVJiXFW1g9Q9h9EnxfiqMOpTBZ15TieCgWQFLHLylCpKXAWXI+060KyY21sb4ai1HmpflDs7gNVIQ3On8gAn5SdWhqlaxhA8hoPh66Bd9IupoccCHK8ubCc2LWVv9y4VYja2oJKhZ7CRr0603W3Xy4mBic3Q9wSkkp/2TdBo7D8ocsAqrqM6kaaYe4dc5U=
+        distributions: sdist bdist_wheel
+        on:
+          tags: true
+          repo: davehunt/pytest-metadata
+cache:
+  pip: true
+install: pip install tox
+script: tox
