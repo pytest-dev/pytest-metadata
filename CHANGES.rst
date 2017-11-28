@@ -1,6 +1,11 @@
 Release Notes
 -------------
 
+1.5.1 (2017-11-28)
+------------------
+
+* Support latest versions of pytest, which no longer vendor pluggy.
+
 1.5.0 (2017-05-15)
 ------------------
 
