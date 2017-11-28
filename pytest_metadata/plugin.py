@@ -5,7 +5,10 @@
 import os
 import platform
 
-import _pytest._pluggy as pluggy
+try:
+    import _pytest._pluggy as pluggy
+except ImportError:
+    import pluggy
 import pytest
 import py
 
