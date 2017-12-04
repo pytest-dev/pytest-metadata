@@ -24,11 +24,11 @@ jobs:
         provider: pypi
         user: davehunt
         password:
-          secure: JfwV5SsxCHVm9m225BMElEdk1+cHsOoSLpmW8+gl9zDkrcsOCaJ4myZyKNZpZtqScfytcEJ/+PYnOpKMGFLDTTBkliX1dnAml6LtZHVHF+2WLfe7i6OXUjd70B5HLUBpjRTm6bOhtg6viMYIetoAYQJ1jSnMwZZPaNoEDHXcGL1OWvXBg2HpCGWPn+XLqQHp8zUMf5UGUzPN5ScC4ntQGRck3x44BlvxKGpLu7v5bp+rwdBe36oKI0WA91ahI7+9aAvrme5seHXJP0HiEahmdRv9Pmk32NxkGgKiKFsDoSW95laRHtbcDEG5CjwnOemNEBC9PSs/x68Zgw07axgYMpTSS89SJxJI+8MZWdzaaxw5P3Owtkv+a5YwmtDwkRCW0dAuSiRI/AqmUl9BrX5Oc384w4Jg8Pl7NMZzpj0Cz8/NukBQHf3YrAqFzdDaCV//Fe3w5vyU4e6+Z7v1DvEYyRVOBRo/J1uk/YA1fweuhBBR8IVJiXFW1g9Q9h9EnxfiqMOpTBZ15TieCgWQFLHLylCpKXAWXI+060KyY21sb4ai1HmpflDs7gNVIQ3On8gAn5SdWhqlaxhA8hoPh66Bd9IupoccCHK8ubCc2LWVv9y4VYja2oJKhZ7CRr0603W3Xy4mBic3Q9wSkkp/2TdBo7D8ocsAqrqM6kaaYe4dc5U=
+          secure: GLeh84BPqz7a8G6MywG72h/ddWMwXaot5R7kWfAOV/ZrErZ7l1lOEHf3IZ0AodPql+dsz9Ug1jAnNEpnozEVFzY5m9QON0VJORH5KgZjMIhZS5FOFEW24mEzJW6gejNk6vM0TFafj5iB/pwXNMSl3dQl4TX3+x31ARb2Ng/jrvrfDHoIdH6PYgcB0auS8JMryHBg54ObTb0KLsI4G6gRvnkwub6JOK54ZV3fuPUX8tI7f/eT6MFVNN75uDLZavgqz56obwK+8IXQxyx1KYl2PJJJNI3DcCuFOgu0M8zhoc2HjvoDoYgs16dFdpgb1iaSRm9YxgS9czhkxlEFaSxPhRI3MVHO5YFMvAJK2z8vzx4YOsPkHN2kWvNZCMBNhtsdOwDau2l5y8EE+ExRPwsBwQgoBqnTznZavCfDmL0YlV0r58S8R+aLqUU0VqYWgpS7gTk47uQh6x3zaFDacbZZc5Z4nDvNP+JjBEH0mGDPIIkTzwiS+/o9+G0ookMufXQEAFSuydRk6QZ+er1p0JZaBaKKsk1kOYf2Vcfd0LbifJgBZ3zuq83IoBI+7P9gLtFmCUxXGOy1iSkNZHEndufxX3aEIn6gGroDBo33p/0oEuRyvNrSXs5dtkWohdE3sMHJdoGgZV9TvPdvINtXm622ZzUSB2gu50/KVuHRIhPXk6A=
         distributions: sdist bdist_wheel
         on:
           tags: true
-          repo: davehunt/pytest-metadata
+          repo: pytest-dev/pytest-metadata
 cache:
   pip: true
 install: pip install tox
