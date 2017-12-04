@@ -6,7 +6,7 @@ setup(name='pytest-metadata',
       long_description=open('README.rst').read(),
       author='Dave Hunt',
       author_email='dhunt@mozilla.com',
-      url='https://github.com/davehunt/pytest-metadata',
+      url='https://github.com/pytest-dev/pytest-metadata',
       packages=[
           'pytest_metadata',
           'pytest_metadata.ci'],
