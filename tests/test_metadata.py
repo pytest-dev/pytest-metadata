@@ -37,3 +37,11 @@ def test_additional_metadata(testdir):
     result = testdir.runpytest('--metadata', 'Dave', 'Hunt',
                                '--metadata', 'Jim', 'Bob')
     assert result.ret == 0
+
+
+def test_report_header(testdir):
+    result = testdir.runpytest()
+    assert not any(line.startswith('metadata:') for line in
+                   result.stdout.lines)
+    result = testdir.runpytest('-v')
+    assert any(line.startswith('metadata:') for line in result.stdout.lines)
