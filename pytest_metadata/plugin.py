@@ -70,7 +70,8 @@ def pytest_configure(config):
 
 
 def pytest_report_header(config):
-    return 'metadata: {0}'.format(config._metadata)
+    if config.getoption('verbose') > 0:
+        return 'metadata: {0}'.format(config._metadata)
 
 
 @pytest.mark.optionalhook

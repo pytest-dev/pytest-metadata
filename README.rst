@@ -50,6 +50,8 @@ Packages  pytest packages {'py': '1.4.33', 'pytest': '3.0.7'}
 Plugins   pytest plugins  {'metadata': '1.3.0'}
 ========  =============== ===================================
 
+Note: Metadata will only be shown in the report if output is ``--verbose``.
+
 Additional metadata
 -------------------
 
