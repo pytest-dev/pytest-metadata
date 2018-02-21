@@ -44,13 +44,11 @@ The following metadata is gathered by this plugin:
 ========  =============== ===================================
 Key       Description     Example
 ========  =============== ===================================
-Python    Python version  3.6.0
-Platform  Platform        Darwin-16.4.0-x86_64-i386-64bit
-Packages  pytest packages {'py': '1.4.33', 'pytest': '3.0.7'}
-Plugins   pytest plugins  {'metadata': '1.3.0'}
+Python    Python version  3.6.4
+Platform  Platform        Darwin-17.4.0-x86_64-i386-64bit
+Packages  pytest packages {'py': '1.5.2', 'pytest': '3.4.1'}
+Plugins   pytest plugins  {'metadata': '1.6.0'}
 ========  =============== ===================================
-
-Note: Metadata will only be shown in the report if output is ``--verbose``.
 
 Additional metadata
 -------------------
@@ -81,6 +79,19 @@ added to metadata if they're present.
 Note that if you're using `Tox <http://tox.readthedocs.io/>`_ to run your tests
 then you will need to `pass down any additional environment variables <http://tox.readthedocs.io/en/latest/example/basic.html#passing-down-environment-variables>`_
 for these to be picked up.
+
+Viewing metadata
+----------------
+
+If you pass ``--verbose`` on the command line when running your tests, then the
+metadata will be displayed in the terminal report header::
+
+  pytest --verbose
+  ============================ test session starts ============================
+  platform darwin -- Python 3.6.4, pytest-3.4.1, py-1.5.2, pluggy-0.6.0 -- /usr/bin/python
+  cachedir: .pytest_cache
+  metadata: {'Python': '3.6.4', 'Platform': 'Darwin-17.4.0-x86_64-i386-64bit', 'Packages': {'pytest': '3.4.1', 'py': '1.5.2', 'pluggy': '0.6.0'}, 'Plugins': {'metadata': '1.6.0'}}
+  plugins: metadata-1.6.0
 
 Accessing metadata
 ------------------

@@ -1,6 +1,11 @@
 Release Notes
 -------------
 
+1.6.0 (2018-02-21)
+------------------
+
+* Only show metadata in console when ``--verbose`` is specified.
+
 1.5.1 (2017-11-28)
 ------------------
 
