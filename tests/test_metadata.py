@@ -2,6 +2,8 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+import random
+
 pytest_plugins = "pytester",
 
 
@@ -36,6 +38,21 @@ def test_additional_metadata(testdir):
     """)
     result = testdir.runpytest('--metadata', 'Dave', 'Hunt',
                                '--metadata', 'Jim', 'Bob')
+    assert result.ret == 0
+
+
+def test_metadata_hook(testdir):
+    testdir.makeconftest("""
+        import pytest
+        @pytest.mark.optionalhook
+        def pytest_metadata(metadata):
+            metadata['Dave'] = 'Hunt'
+    """)
+    testdir.makepyfile("""
+        def test_pass(metadata):
+            assert metadata.get('Dave') == 'Hunt'
+    """)
+    result = testdir.runpytest()
     assert result.ret == 0
 
 

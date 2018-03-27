@@ -25,6 +25,11 @@ CONTINUOUS_INTEGRATION = {
     'Travis CI': ['TRAVIS', travis_ci.ENVIRONMENT_VARIABLES]}
 
 
+def pytest_addhooks(pluginmanager):
+    from . import hooks
+    pluginmanager.add_hookspecs(hooks)
+
+
 @pytest.fixture(scope='session')
 def metadata(pytestconfig):
     """Provide test session metadata"""
@@ -67,6 +72,8 @@ def pytest_configure(config):
 
     if hasattr(config, 'slaveoutput'):
         config.slaveoutput['metadata'] = config._metadata
+
+    config.hook.pytest_metadata(metadata=config._metadata)
 
 
 def pytest_report_header(config):
