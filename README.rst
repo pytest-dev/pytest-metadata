@@ -96,6 +96,16 @@ metadata will be displayed in the terminal report header::
 Accessing metadata
 ------------------
 
+To add/modify/delete metadata at the end of metadata collection, you can use the `pytest_metadata` hook:
+
+.. code-block:: python
+  import pytest
+  @pytest.mark.optionalhook
+  def pytest_metadata(metadata):
+      for key in metadata.keys():
+         if "password" in key.lower():
+            del metadata[key]
+
 To access the metadata from a test or fixture, you can use the `metadata`
 fixture:
 

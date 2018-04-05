@@ -39,6 +39,21 @@ def test_additional_metadata(testdir):
     assert result.ret == 0
 
 
+def test_metadata_hook(testdir):
+    testdir.makeconftest("""
+        import pytest
+        @pytest.mark.optionalhook
+        def pytest_metadata(metadata):
+            metadata['Dave'] = 'Hunt'
+    """)
+    testdir.makepyfile("""
+        def test_pass(metadata):
+            assert metadata.get('Dave') == 'Hunt'
+    """)
+    result = testdir.runpytest()
+    assert result.ret == 0
+
+
 def test_report_header(testdir):
     result = testdir.runpytest()
     assert not any(line.startswith('metadata:') for line in
