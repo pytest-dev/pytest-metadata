@@ -1,6 +1,13 @@
 Release Notes
 -------------
 
+1.7.0 (2018-04-05)
+------------------
+
+* Add hook for modifying metadata.
+
+  * Thanks to `@j19sch <https://github.com/j19sch>`_ for the PR
+
 1.6.0 (2018-02-21)
 ------------------
 
