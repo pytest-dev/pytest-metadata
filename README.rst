@@ -99,6 +99,7 @@ Accessing metadata
 To add/modify/delete metadata at the end of metadata collection, you can use the `pytest_metadata` hook:
 
 .. code-block:: python
+
   import pytest
   @pytest.mark.optionalhook
   def pytest_metadata(metadata):
