@@ -96,7 +96,7 @@ metadata will be displayed in the terminal report header::
 Accessing metadata
 ------------------
 
-To add/modify/delete metadata at the end of metadata collection, you can use the `pytest_metadata` hook:
+To add/modify/delete metadata at the end of metadata collection, you can use the ``pytest_metadata`` hook:
 
 .. code-block:: python
 
@@ -107,7 +107,7 @@ To add/modify/delete metadata at the end of metadata collection, you can use the
          if "password" in key.lower():
             del metadata[key]
 
-To access the metadata from a test or fixture, you can use the `metadata`
+To access the metadata from a test or fixture, you can use the ``metadata``
 fixture:
 
 .. code-block:: python
@@ -115,8 +115,8 @@ fixture:
   def test_metadata(metadata):
       assert 'metadata' in metadata['Plugins']
 
-To access the metadata from a plugin, you can use the `_metadata` attribute of
-the `config` object. This can be used to read/add/modify the metadata:
+To access the metadata from a plugin, you can use the ``_metadata`` attribute of
+the ``config`` object. This can be used to read/add/modify the metadata:
 
 .. code-block:: python
 
