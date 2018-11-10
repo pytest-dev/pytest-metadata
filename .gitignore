@@ -1,10 +1,8 @@
 __pycache__
 *.egg-info/
 *.pyc
-.cache
-.DS_Store
-.eggs
-.tox
-.idea
+.*
 build
 dist
+!.travis.yml
+!.pre-commit-config.yaml

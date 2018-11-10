@@ -36,6 +36,16 @@ To install pytest-metadata:
 
   $ pip install pytest-metadata
 
+Development
+-----------
+
+To contribute to pytest-metadata:
+
+.. code-block:: bash
+
+  $ pipenv install --dev
+  $ pre-commit install
+
 Available metadata
 ------------------
 
