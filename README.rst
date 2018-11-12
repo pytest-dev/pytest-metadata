@@ -12,6 +12,8 @@ access to test session metadata.
    :alt: PyPI
 .. image:: https://img.shields.io/travis/pytest-dev/pytest-metadata.svg
    :target: https://travis-ci.org/pytest-dev/pytest-metadata/
+.. image:: https://img.shields.io/badge/code%20style-black-000000.svg
+   :target: https://github.com/ambv/black
    :alt: Travis
 .. image:: https://img.shields.io/github/issues-raw/pytest-dev/pytest-metadata.svg
    :target: https://github.com/pytest-dev/pytest-metadata/issues
@@ -39,12 +41,24 @@ To install pytest-metadata:
 Development
 -----------
 
-To contribute to pytest-metadata:
+To contribute to pytest-metadata it helps to
+have `Pipenv <https://pipenv.readthedocs.io/en/latest/>`_
+and `pre-commit <https://pre-commit.com/>`_ installed.
 
 .. code-block:: bash
 
   $ pipenv install --dev
   $ pre-commit install
+
+Running Tests
+_____________
+
+We use `Tox <http://tox.testrun.org/>`_ to manage running tests
+against the supported Python versions.
+
+.. code-block:: bash
+
+  $ pipenv run tox
 
 Available metadata
 ------------------
