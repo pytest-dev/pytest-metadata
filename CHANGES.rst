@@ -1,6 +1,11 @@
 Release Notes
 -------------
 
+(unreleased)
+------------
+
+* Add environment variables for Bitbucket.
+
 1.7.0 (2018-04-05)
 ------------------
 

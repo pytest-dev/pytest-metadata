@@ -80,6 +80,7 @@ integration providers, along with links to the environment variables that are
 added to metadata if they're present.
 
 * `AppVeyor <https://www.appveyor.com/docs/environment-variables/>`_
+* `Bitbucket <https://confluence.atlassian.com/bitbucket/environment-variables-794502608.html>`_
 * `CircleCI <https://circleci.com/docs/1.0/environment-variables/>`_
 * `GitLab CI <http://docs.gitlab.com/ce/ci/variables/README.html>`_
 * `Jenkins <https://wiki.jenkins-ci.org/display/JENKINS/Building+a+software+project#Buildingasoftwareproject-JenkinsSetEnvironmentVariables>`_
