@@ -11,13 +11,16 @@ jobs:
       python: 3.6
       env: TOXENV=py36
     - stage:
+      python: 3.7
+      env: TOXENV=py37
+    - stage:
       python: pypy
       env: TOXENV=pypy
     - stage:
       python: pypy3
       env: TOXENV=pypy3
     - stage: deploy
-      python: 3.6
+      python: 3.7
       install: skip
       script: skip
       deploy:

@@ -1,10 +1,10 @@
 Release Notes
 -------------
 
-(unreleased)
-------------
+1.8.0 (unreleased)
+------------------
 
-* Add environment variables for Bitbucket.
+* Add environment variables for Bitbucket pipelines (CI).
 
 1.7.0 (2018-04-05)
 ------------------
