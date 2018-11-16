@@ -2,7 +2,9 @@ language: python
 jobs:
   include:
     - stage:
-      python: 3.6
+      python: 3.7
+      dist: xenial
+      sudo: required
       env: TOXENV=flake8
     - stage:
       python: 2.7
@@ -12,6 +14,8 @@ jobs:
       env: TOXENV=py36
     - stage:
       python: 3.7
+      dist: xenial
+      sudo: required
       env: TOXENV=py37
     - stage:
       python: pypy
@@ -21,6 +25,8 @@ jobs:
       env: TOXENV=pypy3
     - stage: deploy
       python: 3.7
+      dist: xenial
+      sudo: required
       install: skip
       script: skip
       deploy:
