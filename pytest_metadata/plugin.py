@@ -14,6 +14,7 @@ import py
 
 from pytest_metadata.ci import (
     appveyor,
+    bitbucket,
     circleci,
     gitlab_ci,
     jenkins,
@@ -21,15 +22,15 @@ from pytest_metadata.ci import (
     travis_ci,
 )
 
-
-CONTINUOUS_INTEGRATION = {
-    "AppVeyor": ["APPVEYOR", appveyor.ENVIRONMENT_VARIABLES],
-    "CircleCI": ["CIRCLECI", circleci.ENVIRONMENT_VARIABLES],
-    "GitLab CI": ["GITLAB_CI", gitlab_ci.ENVIRONMENT_VARIABLES],
-    "Jenkins": ["JENKINS_URL", jenkins.ENVIRONMENT_VARIABLES],
-    "TaskCluster": ["TASK_ID", taskcluster.ENVIRONMENT_VARIABLES],
-    "Travis CI": ["TRAVIS", travis_ci.ENVIRONMENT_VARIABLES],
-}
+CONTINUOUS_INTEGRATION = [
+    appveyor.ENVIRONMENT_VARIABLES,
+    bitbucket.ENVIRONMENT_VARIABLES,
+    circleci.ENVIRONMENT_VARIABLES,
+    gitlab_ci.ENVIRONMENT_VARIABLES,
+    jenkins.ENVIRONMENT_VARIABLES,
+    taskcluster.ENVIRONMENT_VARIABLES,
+    travis_ci.ENVIRONMENT_VARIABLES,
+]
 
 
 def pytest_addhooks(pluginmanager):
@@ -77,11 +78,11 @@ def pytest_configure(config):
         plugins[name] = version
     config._metadata["Plugins"] = plugins
 
-    for key, value in CONTINUOUS_INTEGRATION.items():
+    for provider in CONTINUOUS_INTEGRATION:
         [
-            config._metadata.update({v: os.environ.get(v)})
-            for v in value[1]
-            if os.environ.get(v)
+            config._metadata.update({var: os.environ.get(var)})
+            for var in provider
+            if os.environ.get(var)
         ]
 
     if hasattr(config, "slaveoutput"):
