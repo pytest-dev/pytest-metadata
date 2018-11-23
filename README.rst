@@ -128,9 +128,7 @@ To add/modify/delete metadata at the end of metadata collection, you can use the
   import pytest
   @pytest.mark.optionalhook
   def pytest_metadata(metadata):
-      for key in metadata.keys():
-         if "password" in key.lower():
-            del metadata[key]
+      metadata.pop("password", None)
 
 To access the metadata from a test or fixture, you can use the ``metadata``
 fixture:
