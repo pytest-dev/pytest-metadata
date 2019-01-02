@@ -1,7 +1,7 @@
 Release Notes
 -------------
 
-1.8.0 (unreleased)
+1.8.0 (2019-01-03)
 ------------------
 
 * Add environment variables for Bitbucket pipelines (CI).
