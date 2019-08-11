@@ -6,8 +6,11 @@ name = "pypi"
 [packages]
 
 [dev-packages]
-black = "*"
-pytest-metadata = {editable = true, path = "."}
+pytest = "*"
 tox = "*"
+flake8 = "*"
+black = "*"
+pre-commit = "*"
 
 [requires]
+pytest-metadata = {editable = true,path = "."}

@@ -6,6 +6,7 @@ __pycache__
 .eggs
 .tox
 .idea
+.vscode/
 build
 dist
 Pipfile.lock

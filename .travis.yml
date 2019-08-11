@@ -1,28 +1,35 @@
 language: python
 jobs:
   include:
-    - stage:
+    - stage: Tests
+      name: Linting
       python: 3.7
       dist: xenial
       sudo: required
-      env: TOXENV=flake8
-    - stage:
+      env: TOXENV=linting
+
+    -
       python: 2.7
       env: TOXENV=py27
-    - stage:
+
+    -
       python: 3.6
       env: TOXENV=py36
-    - stage:
+
+    -
       python: 3.7
       dist: xenial
       sudo: required
       env: TOXENV=py37
-    - stage:
+
+    -
       python: pypy
       env: TOXENV=pypy
-    - stage:
+
+    -
       python: pypy3
       env: TOXENV=pypy3
+
     - stage: deploy
       python: 3.7
       dist: xenial
@@ -38,7 +45,9 @@ jobs:
         on:
           tags: true
           repo: pytest-dev/pytest-metadata
-cache:
-  pip: true
+
+cache: pip
+
 install: pip install tox
+
 script: tox
