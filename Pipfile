@@ -3,8 +3,6 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 name = "pypi"
 
-[packages]
-
 [dev-packages]
 pytest = "*"
 tox = "*"
@@ -12,5 +10,5 @@ flake8 = "*"
 black = "*"
 pre-commit = "*"
 
-[requires]
+[packages]
 pytest-metadata = {editable = true,path = "."}
