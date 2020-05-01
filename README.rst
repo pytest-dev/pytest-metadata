@@ -25,9 +25,9 @@ access to test session metadata.
 Requirements
 ------------
 
-You will need the following prerequisites in order to use pytest-metadata:
+You will need the following in order to use pytest-metadata:
 
-- Python 2.7, 3.6, PyPy, or PyPy3
+- Python 2.7, 3.6+, PyPy, or PyPy3
 
 Installation
 ------------
