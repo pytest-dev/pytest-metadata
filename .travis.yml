@@ -4,8 +4,6 @@ jobs:
     - stage: Tests
       name: Linting
       python: 3.7
-      dist: xenial
-      sudo: required
       env: TOXENV=linting
 
     -
@@ -18,8 +16,6 @@ jobs:
 
     -
       python: 3.7
-      dist: xenial
-      sudo: required
       env: TOXENV=py37
 
     -
@@ -32,8 +28,6 @@ jobs:
 
     - stage: deploy
       python: 3.7
-      dist: xenial
-      sudo: required
       install: skip
       script: skip
       deploy:
