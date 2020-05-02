@@ -70,6 +70,10 @@ Note: You can provide multiple sets of ``--metadata``::
 
    pytest --metadata foo bar --metadata baz zoo
 
+There's also the possibility of passing in metadata as a JSON string::
+
+    pytest --metadata-from-json '{"cat_says": "bring the cat nip", "human_says": "yes kitty"}'
+
 Continuous integration
 ----------------------
 

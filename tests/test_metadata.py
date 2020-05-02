@@ -44,6 +44,31 @@ def test_additional_metadata(testdir):
     assert result.ret == 0
 
 
+def test_additional_metadata_from_json(testdir):
+    testdir.makepyfile(
+        """
+        def test_pass(metadata):
+            assert metadata.get('Imran') == 'Mumtaz'
+    """
+    )
+    result = testdir.runpytest("--metadata-from-json", '{"Imran": "Mumtaz"}')
+    assert result.ret == 0
+
+
+def test_additional_metadata_using_both_key_values_and_json(testdir):
+    testdir.makepyfile(
+        """
+        def test_pass(metadata):
+            assert metadata.get('John') == 'Cena'
+            assert metadata.get('Dwayne') == 'Johnson'
+    """
+    )
+    result = testdir.runpytest(
+        "--metadata", "John", "Cena", "--metadata-from-json", '{"Dwayne": "Johnson"}'
+    )
+    assert result.ret == 0
+
+
 def test_metadata_hook(testdir):
     testdir.makeconftest(
         """
