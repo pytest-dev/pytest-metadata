@@ -1,6 +1,11 @@
 Release Notes
 -------------
 
+1.9.0 (unreleased)
+------------------
+
+* Add ``--metadata-from-json`` argument to support passing metadata as json.
+
 1.8.0 (2019-01-03)
 ------------------
 

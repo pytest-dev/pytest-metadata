@@ -1,7 +1,7 @@
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
-
+import json
 import os
 import platform
 
@@ -55,6 +55,13 @@ def pytest_addoption(parser):
         nargs=2,
         help="additional metadata.",
     )
+    parser.addoption(
+        "--metadata-from-json",
+        action="store",
+        default="{}",
+        dest="metadata_from_json",
+        help="additional metadata from a json string.",
+    )
 
 
 @pytest.hookimpl(tryfirst=True)
@@ -69,6 +76,7 @@ def pytest_configure(config):
         },
     }
     config._metadata.update({k: v for k, v in config.getoption("metadata")})
+    config._metadata.update(json.loads(config.getoption("metadata_from_json")))
 
     plugins = dict()
     for plugin, dist in config.pluginmanager.list_plugin_distinfo():
