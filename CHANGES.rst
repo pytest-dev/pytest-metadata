@@ -1,10 +1,20 @@
 Release Notes
 -------------
 
-1.9.0 (unreleased)
+1.9.0 (2020-04-03)
 ------------------
 
 * Add ``--metadata-from-json`` argument to support passing metadata as json.
+
+  * Thanks to `@ImXron <https://github.com/ImXron>`_ for the PR
+
+* Add support for python 3.8.
+
+  * Thanks to `@hugovk <https://github.com/hugovk>`_ for the PR
+
+* Remove always-masked GitLab environment variables.
+
+  * Thanks to `@borntyping <https://github.com/borntyping>`_ for the PR
 
 1.8.0 (2019-01-03)
 ------------------
