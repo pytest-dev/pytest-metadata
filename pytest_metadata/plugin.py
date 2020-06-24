@@ -93,8 +93,8 @@ def pytest_configure(config):
             if os.environ.get(var)
         ]
 
-    if hasattr(config, "slaveoutput"):
-        config.slaveoutput["metadata"] = config._metadata
+    if hasattr(config, "workeroutput"):
+        config.workeroutput["metadata"] = config._metadata
 
     config.hook.pytest_metadata(metadata=config._metadata)
 
@@ -106,7 +106,7 @@ def pytest_report_header(config):
 
 @pytest.mark.optionalhook
 def pytest_testnodedown(node):
-    # note that any metadata from remote slaves will be replaced with the
-    # environment from the final slave to quit
-    if hasattr(node, "slaveoutput"):
-        node.config._metadata.update(node.slaveoutput["metadata"])
+    # note that any metadata from remote workers will be replaced with the
+    # environment from the final worker to quit
+    if hasattr(node, "workeroutput"):
+        node.config._metadata.update(node.workeroutput["metadata"])
