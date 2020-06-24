@@ -1,6 +1,9 @@
 Release Notes
 -------------
 
+1.10.0 (2020-06-24)
+------------------
+
 * Compatible with ``pytest-xdist`` 1.22.3+, now including 2.0+
 
   * Thanks to `@Zac-HD <https://github.com/Zac-HD>`_ for the PR
