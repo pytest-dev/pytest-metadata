@@ -145,6 +145,8 @@ Here's a handy list of plugins that either read or contribute to the metadata:
   base URL to the metadata.
 * `pytest-html <https://pypi.python.org/pypi/pytest-html/>`_ - Displays the
   metadata at the start of each report.
+* `pytest-reporter-html1 <https://pypi.org/project/pytest-reporter-html1/>`_ -
+  Presents metadata as part of the report.
 * `pytest-selenium <https://pypi.python.org/pypi/pytest-selenium/>`_ - Adds the
   driver, capabilities, and remote server to the metadata.
 
