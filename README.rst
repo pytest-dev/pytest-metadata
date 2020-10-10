@@ -107,6 +107,38 @@ metadata will be displayed in the terminal report header::
   metadata: {'Python': '3.6.4', 'Platform': 'Darwin-17.4.0-x86_64-i386-64bit', 'Packages': {'pytest': '3.4.1', 'py': '1.5.2', 'pluggy': '0.6.0'}, 'Plugins': {'metadata': '1.6.0'}}
   plugins: metadata-1.6.0
 
+Including metadata in Junit XML
+-------------------------------
+
+Pytest-metadata provides the session scoped fixture :code:`include_metadata_in_junit_xml` that you may use to include any metadata in Junit XML as ``property`` tags.
+For example the following test module
+
+.. code-block:: python
+
+  import pytest
+
+  pytestmark = pytest.mark.usefixtures('include_metadata_in_junit_xml')
+
+  def test():
+      pass
+
+when called with
+
+.. code-block:: bash
+
+  pytest --metadata Daffy Duck --junit-xml=results.xml
+
+would produce the following XML
+
+.. code-block:: xml
+
+  <?xml version="1.0" encoding="utf-8"?>
+  <testsuites>
+    <testsuite name="pytest" errors="0" failures="0" skipped="0" tests="1" time="0.009" timestamp="2020-11-27T06:38:44.407674" hostname="sam">
+      <properties>
+        <property name="Daffy" value="Duck"/>
+  ...
+
 Accessing metadata
 ------------------
 
