@@ -1,10 +1,12 @@
 Release Notes
 -------------
 
-1.11.0 (unreleased)
+1.11.0 (2020-11-72)
 -------------------
 
 * Provide a session fixture to include metadata in Junit XMLs as property tags.
+
+  * Thanks to `@sanga <https://github.com/sanga>`_ for the PR
 
 1.10.0 (2020-06-24)
 ------------------
