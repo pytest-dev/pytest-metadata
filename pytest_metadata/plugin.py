@@ -45,6 +45,14 @@ def metadata(pytestconfig):
     return pytestconfig._metadata
 
 
+@pytest.fixture(scope="session")
+def include_metadata_in_junit_xml(metadata, pytestconfig, record_testsuite_property):
+    """Provide test session metadata"""
+    metadata_ = pytestconfig._metadata
+    for name, value in metadata_.items():
+        record_testsuite_property(name, value)
+
+
 def pytest_addoption(parser):
     parser.addoption(
         "--metadata",
