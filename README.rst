@@ -74,6 +74,10 @@ There's also the possibility of passing in metadata as a JSON string::
 
     pytest --metadata-from-json '{"cat_says": "bring the cat nip", "human_says": "yes kitty"}'
 
+Alternatively a JSON can be read from a given file::
+
+    pytest --metadata-from-json-file path/to/valid/file.json
+
 Continuous integration
 ----------------------
 
