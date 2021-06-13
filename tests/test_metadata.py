@@ -3,6 +3,7 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 import pytest
 from xml.etree import ElementTree as ET
+from tempfile import NamedTemporaryFile
 
 pytest_plugins = ("pytester",)
 
@@ -87,16 +88,41 @@ def test_additional_metadata_from_json(testdir):
     assert result.ret == 0
 
 
-def test_additional_metadata_using_both_key_values_and_json(testdir):
+def test_additional_metadata_from_json_file(testdir):
+    testdir.makepyfile(
+        """
+        def test_pass(metadata):
+            assert metadata.get('John') == 'Cena'
+    """
+    )
+
+    json_temp = NamedTemporaryFile()
+    json_temp.write('{"John": "Cena"}'.encode(encoding="utf-8"))
+    json_temp.flush()
+    result = testdir.runpytest("--metadata-from-json-file", json_temp.name)
+    assert result.ret == 0
+
+
+def test_additional_metadata_using_key_values_json_str_and_file(testdir):
     testdir.makepyfile(
         """
         def test_pass(metadata):
             assert metadata.get('John') == 'Cena'
             assert metadata.get('Dwayne') == 'Johnson'
+            assert metadata.get('Andre') == 'The Giant'
     """
     )
+    json_temp = NamedTemporaryFile()
+    json_temp.write('{"Andre": "The Giant"}'.encode(encoding="utf-8"))
+    json_temp.flush()
     result = testdir.runpytest(
-        "--metadata", "John", "Cena", "--metadata-from-json", '{"Dwayne": "Johnson"}'
+        "--metadata",
+        "John",
+        "Cena",
+        "--metadata-from-json",
+        '{"Dwayne": "Johnson"}',
+        "--metadata-from-json-file",
+        json_temp.name,
     )
     assert result.ret == 0
 
