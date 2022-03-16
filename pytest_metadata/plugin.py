@@ -93,7 +93,7 @@ def pytest_configure(config):
     config._metadata.update(json.loads(config.getoption("metadata_from_json")))
     if config.getoption("metadata_from_json_file"):
         with open(config.getoption("metadata_from_json_file"), "r") as json_file:
-            config._metadata.update(json.loads(json_file.read()))
+            config._metadata.update(json.load(json_file))
     plugins = dict()
     for plugin, dist in config.pluginmanager.list_plugin_distinfo():
         name, version = dist.project_name, dist.version
