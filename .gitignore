@@ -2,11 +2,10 @@ __pycache__
 *.egg-info/
 *.pyc
 .cache
-.DS_Store
 .eggs
 .tox
-.idea
-.vscode/
+
 build
 dist
-Pipfile.lock
+
+pytest_metadata/__version.py

@@ -1,0 +1,31 @@
+[build-system]
+requires = [
+  # sync with setup.py until we discard non-pep-517/518
+  "setuptools>=45.0",
+  "setuptools-scm[toml]>=6.2.3",
+  "wheel",
+]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools_scm]
+write_to = "pytest_metadata/__version.py"
+
+[tool.poetry]
+name = "pytest-metadata"
+version = "1.11.0"
+description = "pytest plugin for test session metadata"
+authors = ["Dave Hunt"]
+license = "Mozilla Public License 2.0 (MPL 2.0)"
+
+[tool.poetry.dependencies]
+python = "^3.7"
+pytest = "^7.1.1"
+
+[tool.poetry.dev-dependencies]
+black = "^22.1.0"
+flake8 = "^4.0.1"
+tox = "^3.24.5"
+pre-commit = "^2.17.0"
+
+[tool.black]
+target-version = ['py37']
