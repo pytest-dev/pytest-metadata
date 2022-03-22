@@ -1,37 +1,4 @@
 from setuptools import setup
 
-setup(
-    name="pytest-metadata",
-    use_scm_version=True,
-    description="pytest plugin for test session metadata",
-    long_description=open("README.rst").read(),
-    author="Dave Hunt",
-    author_email="dhunt@mozilla.com",
-    url="https://github.com/pytest-dev/pytest-metadata",
-    packages=["pytest_metadata", "pytest_metadata.ci"],
-    entry_points={"pytest11": ["metadata = pytest_metadata.plugin"]},
-    setup_requires=["setuptools_scm"],
-    install_requires=["pytest>=2.9.0"],
-    license="Mozilla Public License 2.0 (MPL 2.0)",
-    keywords="py.test pytest metadata",
-    python_requires=">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*, !=3.5.*",
-    classifiers=[
-        "Development Status :: 5 - Production/Stable",
-        "Framework :: Pytest",
-        "Intended Audience :: Developers",
-        "License :: OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)",
-        "Operating System :: POSIX",
-        "Operating System :: Microsoft :: Windows",
-        "Operating System :: MacOS :: MacOS X",
-        "Topic :: Software Development :: Quality Assurance",
-        "Topic :: Software Development :: Testing",
-        "Topic :: Utilities",
-        "Programming Language :: Python",
-        "Programming Language :: Python :: 2",
-        "Programming Language :: Python :: 2.7",
-        "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.6",
-        "Programming Language :: Python :: 3.7",
-        "Programming Language :: Python :: 3.8",
-    ],
-)
+if __name__ == "__main__":
+    setup()
