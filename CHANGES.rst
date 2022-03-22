@@ -1,6 +1,19 @@
 Release Notes
 -------------
 
+2.0.0 (2022-03-22)
+------------------
+
+* Drop support for python 2.7 and 3.6
+
+* Add support for python 3.9 and 3.10
+
+* Introduce pyproject.toml
+
+* Provide metadata via JSON file
+
+  * Thanks to `@digitalorder <https://github.com/digitalorder>`_ for the PR
+
 1.11.0 (2020-11-72)
 -------------------
 
