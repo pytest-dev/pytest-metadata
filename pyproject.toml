@@ -29,3 +29,6 @@ pre-commit = "^2.17.0"
 
 [tool.black]
 target-version = ['py37']
+
+[tool.poetry.plugins.pytest11]
+metadata = 'pytest_metadata.plugin'
