@@ -96,7 +96,7 @@ def test_additional_metadata_from_json_file(testdir):
     """
     )
 
-    json_temp = NamedTemporaryFile()
+    json_temp = NamedTemporaryFile(delete=False)
     json_temp.write('{"John": "Cena"}'.encode(encoding="utf-8"))
     json_temp.flush()
     result = testdir.runpytest("--metadata-from-json-file", json_temp.name)
@@ -112,7 +112,7 @@ def test_additional_metadata_using_key_values_json_str_and_file(testdir):
             assert metadata.get('Andre') == 'The Giant'
     """
     )
-    json_temp = NamedTemporaryFile()
+    json_temp = NamedTemporaryFile(delete=False)
     json_temp.write('{"Andre": "The Giant"}'.encode(encoding="utf-8"))
     json_temp.flush()
     result = testdir.runpytest(
