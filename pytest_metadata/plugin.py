@@ -70,6 +70,12 @@ def pytest_addoption(parser):
         dest="metadata_from_json",
         help="additional metadata from a json string.",
     )
+    parser.addoption(
+        "--metadata-from-json-file",
+        type=str,
+        dest="metadata_from_json_file",
+        help="additional metadata from a json file.",
+    )
 
 
 @pytest.hookimpl(tryfirst=True)
@@ -85,7 +91,9 @@ def pytest_configure(config):
     }
     config._metadata.update({k: v for k, v in config.getoption("metadata")})
     config._metadata.update(json.loads(config.getoption("metadata_from_json")))
-
+    if config.getoption("metadata_from_json_file"):
+        with open(config.getoption("metadata_from_json_file"), "r") as json_file:
+            config._metadata.update(json.load(json_file))
     plugins = dict()
     for plugin, dist in config.pluginmanager.list_plugin_distinfo():
         name, version = dist.project_name, dist.version
