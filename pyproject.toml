@@ -1,21 +1,44 @@
 [build-system]
-requires = [
-  # sync with setup.py until we discard non-pep-517/518
-  "setuptools>=45.0",
-  "setuptools-scm[toml]>=6.2.3",
-  "wheel",
-]
-build-backend = "setuptools.build_meta"
-
-[tool.setuptools_scm]
-write_to = "pytest_metadata/__version.py"
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "pytest-metadata"
 version = "2.0.0"
 description = "pytest plugin for test session metadata"
-authors = ["Dave Hunt"]
+authors = [
+    "Dave Hunt <dhunt@mozilla.com>"
+]
+maintainers = [
+    "Jim Brännlund <jimbrannlund@fastmail.com>"
+]
 license = "Mozilla Public License 2.0 (MPL 2.0)"
+readme = "README.rst"
+repository = "https://github.com/pytest-dev/pytest-metadata"
+
+
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Framework :: Pytest",
+    "Intended Audience :: Developers",
+    "Operating System :: POSIX",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: MacOS :: MacOS X",
+    "Topic :: Software Development :: Quality Assurance",
+    "Topic :: Software Development :: Testing",
+    "Topic :: Utilities",
+]
+keywords = ["pytest", "metadata"]
+
+packages = [
+    { include = "pytest_metadata" },
+]
+include = [
+    { path = "tests", format = "sdist" },
+]
+
+[tool.poetry.plugins.pytest11]
+metadata = 'pytest_metadata.plugin'
 
 [tool.poetry.dependencies]
 python = "^3.7"
