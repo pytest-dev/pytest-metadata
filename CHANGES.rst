@@ -1,6 +1,14 @@
 Release Notes
 -------------
 
+
+2.0.1 (2022-03-26)
+------------------
+
+* Fix issues with switching to pyproject.toml
+
+    * Thanks to `@dvzrv <https://github.com/dvzrv>`_ and `@eltrufas <https://github.com/eltrufas>`_ for raising issues and providing fixes.
+
 2.0.0 (2022-03-22)
 ------------------
 
