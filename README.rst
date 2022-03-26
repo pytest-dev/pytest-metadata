@@ -27,7 +27,7 @@ Requirements
 
 You will need the following in order to use pytest-metadata:
 
-- Python 2.7, 3.6+, PyPy, or PyPy3
+- Python 3.7+ or PyPy3
 
 Installation
 ------------
