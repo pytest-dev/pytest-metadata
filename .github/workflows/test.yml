@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python: ["3.7", "3.8", "3.9", "3.10", "pypy-3.8"]
+        python: ["3.7", "3.8", "3.9", "3.10", "~3.11.0-0", "pypy-3.8"]
         os: [ubuntu-latest, windows-latest]
         include:
           - python: "3.7"
@@ -26,22 +26,24 @@ jobs:
             tox_env: "py39"
           - python: "3.10"
             tox_env: "py310"
+          - python: "~3.11.0-0" # see https://github.com/actions/setup-python/issues/213#issuecomment-1146676713
+            tox_env: py311
           - python: "pypy-3.8"
             tox_env: "pypy3"
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python
-      uses: actions/setup-python@v3
-      with:
-        python-version: ${{ matrix.python }}
-    - name: Install tox
-      run: |
-        python -m pip install --upgrade pip
-        pip install tox
-    - name: Cache tox environments
-      uses: actions/cache@v3
-      with:
-        path: .tox
-        key: tox-${{ matrix.os }}-${{ matrix.python }}-${{ hashFiles('pyproject.toml') }}
-    - name: Test
-      run: tox -e ${{ matrix.tox_env }}
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Install tox
+        run: |
+          python -m pip install --upgrade pip
+          pip install tox
+      - name: Cache tox environments
+        uses: actions/cache@v3
+        with:
+          path: .tox
+          key: tox-${{ matrix.os }}-${{ matrix.python }}-${{ hashFiles('pyproject.toml') }}
+      - name: Test
+        run: tox -e ${{ matrix.tox_env }}
