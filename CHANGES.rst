@@ -1,11 +1,17 @@
 Release Notes
 -------------
 
+2.0.3 (2022-10-26)
+------------------
+
+* Remove `py` dependency
+
+  * Thanks to `@Czaki <https://github.com/Czaki>`_ for reporting.
+
 2.0.2 (2022-07-15)
 ------------------
 
 * Allow all python versions above 3.7
-
 
 2.0.1 (2022-03-26)
 ------------------
