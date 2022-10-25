@@ -10,7 +10,6 @@ try:
 except ImportError:
     import pluggy
 import pytest
-import py
 
 from pytest_metadata.ci import (
     appveyor,
@@ -85,7 +84,6 @@ def pytest_configure(config):
         "Platform": platform.platform(),
         "Packages": {
             "pytest": pytest.__version__,
-            "py": py.__version__,
             "pluggy": pluggy.__version__,
         },
     }
