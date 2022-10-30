@@ -1,6 +1,11 @@
 Release Notes
 -------------
 
+2.0.4 (2022-10-30)
+------------------
+
+* Fix deprecated `pytest.mark.optionalhook` marker.
+
 2.0.3 (2022-10-26)
 ------------------
 
