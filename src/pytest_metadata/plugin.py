@@ -118,7 +118,7 @@ def pytest_report_header(config):
         return "metadata: {0}".format(config._metadata)
 
 
-@pytest.mark.optionalhook
+@pytest.hookimpl(optionalhook=True)
 def pytest_testnodedown(node):
     # note that any metadata from remote workers will be replaced with the
     # environment from the final worker to quit
