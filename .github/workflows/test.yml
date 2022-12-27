@@ -27,7 +27,7 @@ jobs:
           - python: "3.10"
             tox_env: "py310"
           - python: "~3.11.0-0" # see https://github.com/actions/setup-python/issues/213#issuecomment-1146676713
-            tox_env: py311
+            tox_env: "py311"
           - python: "pypy-3.8"
             tox_env: "pypy3"
     steps:
@@ -44,6 +44,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: .tox
-          key: tox-${{ matrix.os }}-${{ matrix.python }}-${{ hashFiles('pyproject.toml') }}
+          # increment if issues with cache
+          key: tox-${{ matrix.os }}-${{ matrix.python }}-${{ hashFiles('pyproject.toml') }}-01
       - name: Test
         run: tox -e ${{ matrix.tox_env }}
