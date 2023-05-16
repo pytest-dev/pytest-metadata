@@ -101,11 +101,9 @@ def pytest_configure(config):
     config._metadata["Plugins"] = plugins
 
     for provider in CONTINUOUS_INTEGRATION:
-        [
-            config._metadata.update({var: os.environ.get(var)})
-            for var in provider
-            if os.environ.get(var)
-        ]
+        for var in provider:
+            if os.environ.get(var):
+                config._metadata.update({var: os.environ.get(var)})
 
     if hasattr(config, "workeroutput"):
         config.workeroutput["metadata"] = config._metadata
