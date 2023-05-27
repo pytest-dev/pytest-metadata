@@ -8,7 +8,7 @@ on:
 
 jobs:
   publish:
-    if: github.repository == 'pytest-dev/pytest-base-url'
+    if: github.repository == 'pytest-dev/pytest-metadata'
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3

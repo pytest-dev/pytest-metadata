@@ -94,6 +94,7 @@ def pytest_configure(config):
     config.stash[metadata_key].update(
         json.loads(config.getoption("metadata_from_json"))
     )
+
     if config.getoption("metadata_from_json_file"):
         with open(config.getoption("metadata_from_json_file"), "r") as json_file:
             config.stash[metadata_key].update(json.load(json_file))
