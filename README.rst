@@ -151,7 +151,7 @@ To add/modify/delete metadata at the end of metadata collection, you can use the
 .. code-block:: python
 
   import pytest
-  @pytest.mark.optionalhook
+  @pytest.hookimpl(optionalhook=True)
   def pytest_metadata(metadata):
       metadata.pop("password", None)
 
@@ -163,14 +163,14 @@ fixture:
   def test_metadata(metadata):
       assert 'metadata' in metadata['Plugins']
 
-To access the metadata from a plugin, you can use the ``_metadata`` attribute of
+To access the metadata from a plugin, you can use the ``stash`` attribute of
 the ``config`` object. This can be used to read/add/modify the metadata:
 
 .. code-block:: python
 
   def pytest_configure(config):
-    if hasattr(config, '_metadata'):
-        config._metadata['foo'] = 'bar'
+    from pytest_metadata.plugin import metadata_key
+    config.stash[metadata_key]['foo'] = 'bar'
 
 Plugin integrations
 -------------------

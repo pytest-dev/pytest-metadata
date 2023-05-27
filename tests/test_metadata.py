@@ -131,7 +131,7 @@ def test_metadata_hook(testdir):
     testdir.makeconftest(
         """
         import pytest
-        @pytest.mark.optionalhook
+        @pytest.hookimpl(optionalhook=True)
         def pytest_metadata(metadata):
             metadata['Dave'] = 'Hunt'
     """

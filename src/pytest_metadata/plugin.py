@@ -35,7 +35,7 @@ metadata_key = pytest.StashKey[dict]()
 
 
 def pytest_addhooks(pluginmanager):
-    from . import hooks
+    from pytest_metadata import hooks
 
     pluginmanager.add_hookspecs(hooks)
 
