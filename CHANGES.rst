@@ -4,6 +4,8 @@ Release Notes
 3.0.0 (unreleased)
 ------------------
 
+* Switch to Hatch
+
 * Use `pytest.stash` internally instead of `_metadata`
 
 * Simplify code
