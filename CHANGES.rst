@@ -4,6 +4,10 @@ Release Notes
 3.0.0 (unreleased)
 ------------------
 
+* Group CLI options
+
+  * Thanks to `@xmuskrat <https://github.com/xmuskrat>`_ for reporting.
+
 * Switch to Hatch
 
 * Use `pytest.stash` internally instead of `_metadata`
