@@ -55,7 +55,8 @@ def include_metadata_in_junit_xml(metadata, pytestconfig, record_testsuite_prope
 
 
 def pytest_addoption(parser):
-    parser.addoption(
+    group = parser.getgroup("pytest-metadata")
+    group.addoption(
         "--metadata",
         action="append",
         default=[],
@@ -64,14 +65,14 @@ def pytest_addoption(parser):
         nargs=2,
         help="additional metadata.",
     )
-    parser.addoption(
+    group.addoption(
         "--metadata-from-json",
         action="store",
         default="{}",
         dest="metadata_from_json",
         help="additional metadata from a json string.",
     )
-    parser.addoption(
+    group.addoption(
         "--metadata-from-json-file",
         type=str,
         dest="metadata_from_json_file",
