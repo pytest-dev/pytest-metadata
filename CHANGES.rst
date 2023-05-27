@@ -1,6 +1,15 @@
 Release Notes
 -------------
 
+3.0.0 (unreleased)
+------------------
+
+* Use `pytest.stash` internally instead of `_metadata`
+
+* Simplify code
+
+  * Thanks to `@LieYangGH <https://github.com/LeiYangGH>`_ for the PR.
+
 2.0.4 (2022-10-30)
 ------------------
 
