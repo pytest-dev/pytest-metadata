@@ -169,8 +169,10 @@ the ``config`` object. This can be used to read/add/modify the metadata:
 .. code-block:: python
 
   def pytest_configure(config):
-    from pytest_metadata.plugin import metadata_key
-    config.stash[metadata_key]['foo'] = 'bar'
+    metadata = config.pluginmanager.getplugin("metadata")
+    if metadata:
+        from pytest_metadata.plugin import metadata_key
+        config.stash[metadata_key]['foo'] = 'bar'
 
 Plugin integrations
 -------------------
