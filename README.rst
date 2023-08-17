@@ -166,6 +166,8 @@ fixture:
 To access the metadata from a plugin, you can use the ``stash`` attribute of
 the ``config`` object. This can be used to read/add/modify the metadata:
 
+* if using pytest >= 4.0.0:
+
 .. code-block:: python
 
   def pytest_configure(config):
@@ -173,6 +175,20 @@ the ``config`` object. This can be used to read/add/modify the metadata:
     if metadata:
         from pytest_metadata.plugin import metadata_key
         config.stash[metadata_key]['foo'] = 'bar'
+
+* if using pytest < 4.0.0:
+
+.. code-block:: python
+
+  def pytest_configure(config):
+    metadata = config.pluginmanager.getplugin("metadata")
+    if metadata:
+        try:
+            metadata = config._metadata
+        except AttributeError:
+            from pytest_metadata.plugin import metadata_key
+            metadata = config.stash[metadata_key]
+        metadata['foo'] = 'bar'
 
 Plugin integrations
 -------------------
