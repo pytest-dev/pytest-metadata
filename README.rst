@@ -189,6 +189,7 @@ the ``config`` object. This can be used to read/add/modify the metadata:
             from pytest_metadata.plugin import metadata_key
             metadata = config.stash[metadata_key]
         metadata['foo'] = 'bar'
+    config._metadata = metadata
 
 Plugin integrations
 -------------------
