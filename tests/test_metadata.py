@@ -3,13 +3,12 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 import pytest
 from xml.etree import ElementTree as ET
-from tempfile import NamedTemporaryFile
 
 pytest_plugins = ("pytester",)
 
 
-def test_metadata(testdir):
-    testdir.makepyfile(
+def test_metadata(pytester):
+    pytester.makepyfile(
         """
         def test_pass(metadata):
             for k in ['Python', 'Platform', 'Packages']:
@@ -17,39 +16,41 @@ def test_metadata(testdir):
                 assert 'JENKINS_URL' not in metadata
     """
     )
-    result = testdir.runpytest()
+    result = pytester.runpytest()
     assert result.ret == 0
 
 
-def test_environment_variables(testdir, monkeypatch):
+def test_environment_variables(pytester, monkeypatch):
     monkeypatch.setenv("JENKINS_URL", "foo")
     monkeypatch.setenv("GIT_COMMIT", "bar")
-    testdir.makepyfile(
+    pytester.makepyfile(
         """
         def test_pass(metadata):
             assert metadata.get('JENKINS_URL') == 'foo'
             assert metadata.get('GIT_COMMIT') == 'bar'
     """
     )
-    result = testdir.runpytest()
+    result = pytester.runpytest()
     assert result.ret == 0
 
 
-def test_additional_metadata(testdir):
-    testdir.makepyfile(
+def test_additional_metadata(pytester):
+    pytester.makepyfile(
         """
         def test_pass(metadata):
             assert metadata.get('Dave') == 'Hunt'
             assert metadata.get('Jim') == 'Bob'
     """
     )
-    result = testdir.runpytest("--metadata", "Dave", "Hunt", "--metadata", "Jim", "Bob")
+    result = pytester.runpytest(
+        "--metadata", "Dave", "Hunt", "--metadata", "Jim", "Bob"
+    )
     assert result.ret == 0
 
 
 @pytest.mark.parametrize("junit_format", ["xunit1", "xunit2"])
-def test_junit_integration(testdir, junit_format):
-    testdir.makepyfile(
+def test_junit_integration(pytester, junit_format):
+    pytester.makepyfile(
         """
         import pytest
 
@@ -59,7 +60,7 @@ def test_junit_integration(testdir, junit_format):
             pass
     """
     )
-    result = testdir.runpytest(
+    result = pytester.runpytest(
         "--metadata",
         "Daffy",
         "Duck",
@@ -67,7 +68,7 @@ def test_junit_integration(testdir, junit_format):
         "--override-ini='junit_family={}'".format(junit_format),
     )
     assert result.ret == 0
-    results_file = testdir.tmpdir.join("results.xml")
+    results_file = pytester.path.joinpath("results.xml")
     assert results_file.exists()
     with results_file.open() as fd:
         xml = ET.parse(fd)
@@ -77,34 +78,32 @@ def test_junit_integration(testdir, junit_format):
     assert {"name": "Daffy", "value": "Duck"} in xml_metadata
 
 
-def test_additional_metadata_from_json(testdir):
-    testdir.makepyfile(
+def test_additional_metadata_from_json(pytester):
+    pytester.makepyfile(
         """
         def test_pass(metadata):
             assert metadata.get('Imran') == 'Mumtaz'
     """
     )
-    result = testdir.runpytest("--metadata-from-json", '{"Imran": "Mumtaz"}')
+    result = pytester.runpytest("--metadata-from-json", '{"Imran": "Mumtaz"}')
     assert result.ret == 0
 
 
-def test_additional_metadata_from_json_file(testdir):
-    testdir.makepyfile(
+def test_additional_metadata_from_json_file(pytester):
+    pytester.makepyfile(
         """
         def test_pass(metadata):
             assert metadata.get('John') == 'Cena'
     """
     )
+    pytester.makefile(".json", temp='{"John": "Cena"}')
 
-    json_temp = NamedTemporaryFile(delete=False)
-    json_temp.write('{"John": "Cena"}'.encode(encoding="utf-8"))
-    json_temp.flush()
-    result = testdir.runpytest("--metadata-from-json-file", json_temp.name)
+    result = pytester.runpytest("--metadata-from-json-file", "temp.json")
     assert result.ret == 0
 
 
-def test_additional_metadata_using_key_values_json_str_and_file(testdir):
-    testdir.makepyfile(
+def test_additional_metadata_using_key_values_json_str_and_file(pytester):
+    pytester.makepyfile(
         """
         def test_pass(metadata):
             assert metadata.get('John') == 'Cena'
@@ -112,23 +111,22 @@ def test_additional_metadata_using_key_values_json_str_and_file(testdir):
             assert metadata.get('Andre') == 'The Giant'
     """
     )
-    json_temp = NamedTemporaryFile(delete=False)
-    json_temp.write('{"Andre": "The Giant"}'.encode(encoding="utf-8"))
-    json_temp.flush()
-    result = testdir.runpytest(
+    pytester.makefile(".json", temp='{"Andre": "The Giant"}')
+
+    result = pytester.runpytest(
         "--metadata",
         "John",
         "Cena",
         "--metadata-from-json",
         '{"Dwayne": "Johnson"}',
         "--metadata-from-json-file",
-        json_temp.name,
+        "temp.json",
     )
     assert result.ret == 0
 
 
-def test_metadata_hook(testdir):
-    testdir.makeconftest(
+def test_metadata_hook(pytester):
+    pytester.makeconftest(
         """
         import pytest
         @pytest.hookimpl(optionalhook=True)
@@ -136,18 +134,18 @@ def test_metadata_hook(testdir):
             metadata['Dave'] = 'Hunt'
     """
     )
-    testdir.makepyfile(
+    pytester.makepyfile(
         """
         def test_pass(metadata):
             assert metadata.get('Dave') == 'Hunt'
     """
     )
-    result = testdir.runpytest()
+    result = pytester.runpytest()
     assert result.ret == 0
 
 
-def test_report_header(testdir):
-    result = testdir.runpytest()
+def test_report_header(pytester):
+    result = pytester.runpytest()
     assert not any(line.startswith("metadata:") for line in result.stdout.lines)
-    result = testdir.runpytest("-v")
+    result = pytester.runpytest("-v")
     assert any(line.startswith("metadata:") for line in result.stdout.lines)
