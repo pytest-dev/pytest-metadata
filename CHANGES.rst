@@ -1,6 +1,13 @@
 Release Notes
 -------------
 
+3.1.1 (2024-02-08)
+------------------
+
+* Add environment variables for AWS CodeBuild CI.
+
+  * Thanks to `@dougch <https://github.com/dougch>`_ for the PR.
+
 3.1.0 (2024-02-01)
 ------------------
 
