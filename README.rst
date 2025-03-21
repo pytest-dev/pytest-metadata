@@ -10,17 +10,12 @@ access to test session metadata.
 .. image:: https://img.shields.io/pypi/v/pytest-metadata.svg
    :target: https://pypi.python.org/pypi/pytest-metadata/
    :alt: PyPI
-.. image:: https://img.shields.io/travis/pytest-dev/pytest-metadata.svg
-   :target: https://travis-ci.org/pytest-dev/pytest-metadata/
 .. image:: https://img.shields.io/badge/code%20style-black-000000.svg
    :target: https://github.com/ambv/black
    :alt: Travis
 .. image:: https://img.shields.io/github/issues-raw/pytest-dev/pytest-metadata.svg
    :target: https://github.com/pytest-dev/pytest-metadata/issues
    :alt: Issues
-.. image:: https://img.shields.io/requires/github/pytest-dev/pytest-metadata.svg
-   :target: https://requires.io/github/pytest-dev/pytest-metadata/requirements/?branch=master
-   :alt: Requirements
 
 Requirements
 ------------
