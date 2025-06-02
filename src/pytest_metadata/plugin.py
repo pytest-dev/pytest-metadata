@@ -4,6 +4,9 @@
 import json
 import os
 import platform
+from typing import Dict, Callable
+
+from pytest import PytestPluginManager, Config, Parser
 
 try:
     import _pytest._pluggy as pluggy
@@ -36,27 +39,31 @@ CONTINUOUS_INTEGRATION = [
 metadata_key = pytest.StashKey[dict]()
 
 
-def pytest_addhooks(pluginmanager):
+def pytest_addhooks(pluginmanager: PytestPluginManager) -> None:
     from pytest_metadata import hooks
 
     pluginmanager.add_hookspecs(hooks)
 
 
 @pytest.fixture(scope="session")
-def metadata(pytestconfig):
+def metadata(pytestconfig: Config) -> Dict:
     """Provide test session metadata"""
     return pytestconfig.stash[metadata_key]
 
 
 @pytest.fixture(scope="session")
-def include_metadata_in_junit_xml(metadata, pytestconfig, record_testsuite_property):
+def include_metadata_in_junit_xml(
+    metadata: Dict,
+    pytestconfig: Config,
+    record_testsuite_property: Callable[[str, object], None],
+) -> None:
     """Provide test session metadata"""
     metadata_ = pytestconfig.stash[metadata_key]
     for name, value in metadata_.items():
         record_testsuite_property(name, value)
 
 
-def pytest_addoption(parser):
+def pytest_addoption(parser: Parser) -> None:
     group = parser.getgroup("pytest-metadata")
     group.addoption(
         "--metadata",
@@ -83,7 +90,7 @@ def pytest_addoption(parser):
 
 
 @pytest.hookimpl(tryfirst=True)
-def pytest_configure(config):
+def pytest_configure(config: Config) -> None:
     config.stash[metadata_key] = {
         "Python": platform.python_version(),
         "Platform": platform.platform(),
@@ -118,13 +125,15 @@ def pytest_configure(config):
     config.hook.pytest_metadata(metadata=config.stash[metadata_key], config=config)
 
 
-def pytest_report_header(config):
+def pytest_report_header(config: Config) -> str | None:
     if config.getoption("verbose") > 0:
         return "metadata: {0}".format(config.stash[metadata_key])
 
 
 @pytest.hookimpl(optionalhook=True)
-def pytest_testnodedown(node):
+def pytest_testnodedown(
+    node: "pytest_xdist.WorkerController",  # noqa: F821
+) -> None:  # type:ignore[name-defined]
     # note that any metadata from remote workers will be replaced with the
     # environment from the final worker to quit
     if hasattr(node, "workeroutput"):

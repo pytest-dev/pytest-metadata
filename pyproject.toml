@@ -52,6 +52,7 @@ test = [
   "flake8>=4.0.1",
   "pre-commit>=2.17.0",
   "tox>=3.24.5",
+  "mypy>=1.16.0",
 ]
 
 [project.urls]
@@ -77,3 +78,28 @@ exclude = [
 
 [tool.hatch.build.hooks.vcs]
 version-file = "src/pytest_metadata/__version.py"
+
+[tool.mypy]
+allow_redefinition = false
+allow_untyped_globals = false
+check_untyped_defs = true
+disallow_incomplete_defs = true
+disallow_subclassing_any = true
+disallow_untyped_calls = true
+disallow_untyped_decorators = true
+disallow_untyped_defs = true
+follow_imports = "silent"
+ignore_missing_imports = false
+implicit_reexport = false
+no_implicit_optional = true
+pretty = true
+show_error_codes = true
+strict_equality = true
+warn_no_return = false
+warn_return_any = true
+warn_unreachable = true
+warn_unused_ignores = true
+
+[[tool.mypy.overrides]]
+module = ["_pytest._pluggy.*"]
+ignore_missing_imports = true

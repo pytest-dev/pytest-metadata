@@ -1,7 +1,10 @@
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+from typing import Dict
+
+from pytest import Config
 
 
-def pytest_metadata(metadata, config):
+def pytest_metadata(metadata: Dict, config: Config) -> None:
     """Called after collecting metadata"""
