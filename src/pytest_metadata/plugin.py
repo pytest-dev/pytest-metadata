@@ -5,10 +5,7 @@ import json
 import os
 import platform
 
-try:
-    import _pytest._pluggy as pluggy
-except ImportError:
-    import pluggy
+import pluggy
 import pytest
 
 from pytest_metadata.ci import (
