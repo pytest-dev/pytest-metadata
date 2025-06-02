@@ -5,6 +5,7 @@ __version.py
 .cache
 .eggs
 .tox
+.idea/*
 
 build
 dist

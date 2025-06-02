@@ -2,12 +2,13 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 import pytest
+from pytest import Pytester, MonkeyPatch
 from xml.etree import ElementTree as ET
 
 pytest_plugins = ("pytester",)
 
 
-def test_metadata(pytester):
+def test_metadata(pytester: Pytester) -> None:
     pytester.makepyfile(
         """
         def test_pass(metadata):
@@ -20,7 +21,7 @@ def test_metadata(pytester):
     assert result.ret == 0
 
 
-def test_environment_variables(pytester, monkeypatch):
+def test_environment_variables(pytester: Pytester, monkeypatch: MonkeyPatch) -> None:
     monkeypatch.setenv("JENKINS_URL", "foo")
     monkeypatch.setenv("GIT_COMMIT", "bar")
     pytester.makepyfile(
@@ -34,7 +35,7 @@ def test_environment_variables(pytester, monkeypatch):
     assert result.ret == 0
 
 
-def test_additional_metadata(pytester):
+def test_additional_metadata(pytester: Pytester) -> None:
     pytester.makepyfile(
         """
         def test_pass(metadata):
@@ -49,7 +50,7 @@ def test_additional_metadata(pytester):
 
 
 @pytest.mark.parametrize("junit_format", ["xunit1", "xunit2"])
-def test_junit_integration(pytester, junit_format):
+def test_junit_integration(pytester: Pytester, junit_format: str) -> None:
     pytester.makepyfile(
         """
         import pytest
@@ -78,7 +79,7 @@ def test_junit_integration(pytester, junit_format):
     assert {"name": "Daffy", "value": "Duck"} in xml_metadata
 
 
-def test_additional_metadata_from_json(pytester):
+def test_additional_metadata_from_json(pytester: Pytester) -> None:
     pytester.makepyfile(
         """
         def test_pass(metadata):
@@ -89,7 +90,7 @@ def test_additional_metadata_from_json(pytester):
     assert result.ret == 0
 
 
-def test_additional_metadata_from_json_file(pytester):
+def test_additional_metadata_from_json_file(pytester: Pytester) -> None:
     pytester.makepyfile(
         """
         def test_pass(metadata):
@@ -102,7 +103,9 @@ def test_additional_metadata_from_json_file(pytester):
     assert result.ret == 0
 
 
-def test_additional_metadata_using_key_values_json_str_and_file(pytester):
+def test_additional_metadata_using_key_values_json_str_and_file(
+    pytester: Pytester,
+) -> None:
     pytester.makepyfile(
         """
         def test_pass(metadata):
@@ -125,7 +128,7 @@ def test_additional_metadata_using_key_values_json_str_and_file(pytester):
     assert result.ret == 0
 
 
-def test_metadata_hook(pytester):
+def test_metadata_hook(pytester: Pytester) -> None:
     pytester.makeconftest(
         """
         import pytest
@@ -144,7 +147,7 @@ def test_metadata_hook(pytester):
     assert result.ret == 0
 
 
-def test_report_header(pytester):
+def test_report_header(pytester: Pytester) -> None:
     result = pytester.runpytest()
     assert not any(line.startswith("metadata:") for line in result.stdout.lines)
     result = pytester.runpytest("-v")
