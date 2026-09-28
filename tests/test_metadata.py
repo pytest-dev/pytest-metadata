@@ -8,14 +8,12 @@ pytest_plugins = ("pytester",)
 
 
 def test_metadata(pytester):
-    pytester.makepyfile(
-        """
+    pytester.makepyfile("""
         def test_pass(metadata):
             for k in ['Python', 'Platform', 'Packages']:
                 assert k in metadata
                 assert 'JENKINS_URL' not in metadata
-    """
-    )
+    """)
     result = pytester.runpytest()
     assert result.ret == 0
 
@@ -23,25 +21,21 @@ def test_metadata(pytester):
 def test_environment_variables(pytester, monkeypatch):
     monkeypatch.setenv("JENKINS_URL", "foo")
     monkeypatch.setenv("GIT_COMMIT", "bar")
-    pytester.makepyfile(
-        """
+    pytester.makepyfile("""
         def test_pass(metadata):
             assert metadata.get('JENKINS_URL') == 'foo'
             assert metadata.get('GIT_COMMIT') == 'bar'
-    """
-    )
+    """)
     result = pytester.runpytest()
     assert result.ret == 0
 
 
 def test_additional_metadata(pytester):
-    pytester.makepyfile(
-        """
+    pytester.makepyfile("""
         def test_pass(metadata):
             assert metadata.get('Dave') == 'Hunt'
             assert metadata.get('Jim') == 'Bob'
-    """
-    )
+    """)
     result = pytester.runpytest(
         "--metadata", "Dave", "Hunt", "--metadata", "Jim", "Bob"
     )
@@ -50,16 +44,14 @@ def test_additional_metadata(pytester):
 
 @pytest.mark.parametrize("junit_format", ["xunit1", "xunit2"])
 def test_junit_integration(pytester, junit_format):
-    pytester.makepyfile(
-        """
+    pytester.makepyfile("""
         import pytest
 
         pytestmark = pytest.mark.usefixtures('include_metadata_in_junit_xml')
 
         def test_pass():
             pass
-    """
-    )
+    """)
     result = pytester.runpytest(
         "--metadata",
         "Daffy",
@@ -79,23 +71,19 @@ def test_junit_integration(pytester, junit_format):
 
 
 def test_additional_metadata_from_json(pytester):
-    pytester.makepyfile(
-        """
+    pytester.makepyfile("""
         def test_pass(metadata):
             assert metadata.get('Imran') == 'Mumtaz'
-    """
-    )
+    """)
     result = pytester.runpytest("--metadata-from-json", '{"Imran": "Mumtaz"}')
     assert result.ret == 0
 
 
 def test_additional_metadata_from_json_file(pytester):
-    pytester.makepyfile(
-        """
+    pytester.makepyfile("""
         def test_pass(metadata):
             assert metadata.get('John') == 'Cena'
-    """
-    )
+    """)
     pytester.makefile(".json", temp='{"John": "Cena"}')
 
     result = pytester.runpytest("--metadata-from-json-file", "temp.json")
@@ -103,14 +91,12 @@ def test_additional_metadata_from_json_file(pytester):
 
 
 def test_additional_metadata_using_key_values_json_str_and_file(pytester):
-    pytester.makepyfile(
-        """
+    pytester.makepyfile("""
         def test_pass(metadata):
             assert metadata.get('John') == 'Cena'
             assert metadata.get('Dwayne') == 'Johnson'
             assert metadata.get('Andre') == 'The Giant'
-    """
-    )
+    """)
     pytester.makefile(".json", temp='{"Andre": "The Giant"}')
 
     result = pytester.runpytest(
@@ -126,20 +112,16 @@ def test_additional_metadata_using_key_values_json_str_and_file(pytester):
 
 
 def test_metadata_hook(pytester):
-    pytester.makeconftest(
-        """
+    pytester.makeconftest("""
         import pytest
         @pytest.hookimpl(optionalhook=True)
         def pytest_metadata(metadata):
             metadata['Dave'] = 'Hunt'
-    """
-    )
-    pytester.makepyfile(
-        """
+    """)
+    pytester.makepyfile("""
         def test_pass(metadata):
             assert metadata.get('Dave') == 'Hunt'
-    """
-    )
+    """)
     result = pytester.runpytest()
     assert result.ret == 0
 
