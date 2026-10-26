@@ -98,7 +98,7 @@ def pytest_configure(config):
     )
 
     if config.getoption("metadata_from_json_file"):
-        with open(config.getoption("metadata_from_json_file"), "r") as json_file:
+        with open(config.getoption("metadata_from_json_file"), "rb") as json_file:
             config.stash[metadata_key].update(json.load(json_file))
     plugins = dict()
     for plugin, dist in config.pluginmanager.list_plugin_distinfo():

@@ -1,6 +1,8 @@
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+import json
+
 import pytest
 from xml.etree import ElementTree as ET
 
@@ -100,6 +102,22 @@ def test_additional_metadata_from_json_file(pytester):
 
     result = pytester.runpytest("--metadata-from-json-file", "temp.json")
     assert result.ret == 0
+
+
+@pytest.mark.parametrize("encoding", ["utf-8", "utf-8-sig", "utf-16", "utf-32"])
+def test_metadata_from_unicode_json_file(pytester, encoding):
+    content = {"language": "বাংলা", "city": "Montréal"}
+    path = pytester.path / "metadata.json"
+    path.write_bytes(json.dumps(content, ensure_ascii=False).encode(encoding))
+    pytester.makepyfile(
+        """
+        def test_metadata(metadata):
+            assert metadata["language"] == "বাংলা"
+            assert metadata["city"] == "Montréal"
+    """
+    )
+    result = pytester.runpytest("--metadata-from-json-file", str(path))
+    result.assert_outcomes(passed=1)
 
 
 def test_additional_metadata_using_key_values_json_str_and_file(pytester):
