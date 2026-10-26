@@ -191,6 +191,6 @@ Here's a handy list of plugins that either read or contribute to the metadata:
 Resources
 ---------
 
-- `Release Notes <http://github.com/davehunt/pytest-metadata/blob/master/CHANGES.rst>`_
-- `Issue Tracker <http://github.com/davehunt/pytest-metadata/issues>`_
-- `Code <http://github.com/davehunt/pytest-metadata/>`_
+- `Release Notes <https://github.com/pytest-dev/pytest-metadata/blob/master/CHANGES.rst>`_
+- `Issue Tracker <https://github.com/pytest-dev/pytest-metadata/issues>`_
+- `Code <https://github.com/pytest-dev/pytest-metadata/>`_
