@@ -128,4 +128,4 @@ def pytest_testnodedown(node):
     # note that any metadata from remote workers will be replaced with the
     # environment from the final worker to quit
     if hasattr(node, "workeroutput"):
-        node.config.stash[metadata_key].update(node.workeroutput["metadata"])
+        node.config.stash[metadata_key].update(node.workeroutput.get("metadata", {}))

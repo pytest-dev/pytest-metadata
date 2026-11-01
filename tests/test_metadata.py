@@ -149,3 +149,28 @@ def test_report_header(pytester):
     assert not any(line.startswith("metadata:") for line in result.stdout.lines)
     result = pytester.runpytest("-v")
     assert any(line.startswith("metadata:") for line in result.stdout.lines)
+
+
+@pytest.mark.parametrize("workeroutput", [{}, {"exitstatus": 2}])
+def test_worker_without_metadata_preserves_controller_data(workeroutput):
+    from types import SimpleNamespace
+    from pytest_metadata.plugin import metadata_key, pytest_testnodedown
+
+    metadata = {"controller": "kept"}
+    config = SimpleNamespace(stash={metadata_key: metadata})
+    node = SimpleNamespace(config=config, workeroutput=workeroutput)
+    pytest_testnodedown(node)
+    assert metadata == {"controller": "kept"}
+
+
+def test_worker_metadata_is_still_merged():
+    from types import SimpleNamespace
+    from pytest_metadata.plugin import metadata_key, pytest_testnodedown
+
+    metadata = {"controller": "kept"}
+    config = SimpleNamespace(stash={metadata_key: metadata})
+    node = SimpleNamespace(
+        config=config, workeroutput={"metadata": {"worker": "value"}}
+    )
+    pytest_testnodedown(node)
+    assert metadata == {"controller": "kept", "worker": "value"}
